@@ -1,7 +1,7 @@
 #####################################################################
 # `cleaner.R`
 # Contains a function that reshapes data about presidential campaign 
-#finance expenditures to be more easily analyzed.
+# finance expenditures to be more easily analyzed.
 # requires a data file about candidates political parties.
 # Data source: http://www.fec.gov/disclosurep/PDownload.do
 #####################################################################
