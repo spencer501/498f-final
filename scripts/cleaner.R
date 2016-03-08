@@ -4,6 +4,7 @@
 # finance expenditures to be more easily analyzed.
 # requires a data file about candidates political parties.
 # Data source: http://www.fec.gov/disclosurep/PDownload.do
+# Current as of March 5, 2015
 #####################################################################
 
 # Needed libraries
@@ -11,11 +12,11 @@ library(dplyr)
 library(stringr)
 library(tools)
 
-# Read in data about the political party each candidate belongs to
-pol_party <- read.csv('data/2016_candidate_parties.csv')
-
 # testing
 #file_name <- 'data/2016_campaign_finances.csv'
+
+# Read in data about the political party each candidate belongs to
+cand_data <- read.csv('data/2016_candidates.csv')
 
 # Reshape data for analysis
 clean <- function(file_name) {
@@ -50,18 +51,19 @@ clean <- function(file_name) {
          "Memo" = memo_text
       ) %>%
       
+      # add candidate data
+      left_join(cand_data, by = "Candidate") %>%
+      
       # change format of data
       mutate(Date = as.Date(Date, "%d-%b-%y"),
-             City = str_to_title(City)) %>%
-      
-      # add political party data
-      left_join(pol_party, by = "Candidate") %>%
+             City = str_to_title(City),
+             Candidate = Popular_name) %>%
       
       # rearrange columns
-      select(1, 10, 2:9) %>%
+      select(1, 11:12, 2:9) %>%
       
       # sort rows
-      arrange(Candidate, Date, Amount, State, Category)
+      arrange(desc(Running), Candidate, Date, Amount, State, Category)
    
    
    
@@ -69,6 +71,6 @@ clean <- function(file_name) {
    new_file_name <- paste0(file_path_sans_ext(file_name), "-clean.csv")
    
    # write new file
-   return(write.csv(formatted_data, file = new_file_name))
+   return(write.csv(formatted_data, file = new_file_name, row.names = FALSE))
    
 }
