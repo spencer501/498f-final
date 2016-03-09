@@ -44,7 +44,7 @@ shinyUI(fluidPage(
          tabsetPanel(type = "tabs",
                      tabPanel("Summary"),
                      tabPanel("Travel"), 
-                     tabPanel("expenses"), 
+                     tabPanel("Expense Summary"), 
                      tabPanel("Table")
          )
       )
