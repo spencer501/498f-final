@@ -7,7 +7,7 @@
 library(dplyr)
 
 # temp
-cand_name <- "Donald Trump"
+#cand_name <- "Donald Trump"
 
 # Read in clean data
 fec_data <- read.csv('data/2016_campaign_finances-clean.csv')
@@ -26,7 +26,8 @@ spending_by_date_for <- function(spending_data) {
       group_by(Candidate, Date) %>% 
       summarise('transactions' = length(Amount),
                 'total_spent' = sum(Amount),
-                'location' = Zip[1])
+                'lat' = Lat[1],
+                'lng' = Lng[1])
    
    return(return_data)
 }
