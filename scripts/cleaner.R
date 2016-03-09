@@ -21,6 +21,9 @@ cand_data <- read.csv('data/2016_candidates.csv')
 # Read in data about US states
 state_info <- read.csv('data/state_info.csv')
 
+# Read in data mapping zip codes to lat/lng coordinates
+zip_data <- read.csv('data/location_data.csv', stringsAsFactors = FALSE)
+
 # Reshape data for analysis
 clean <- function(file_name) {
    
@@ -63,29 +66,38 @@ clean <- function(file_name) {
          Date = as.Date(Date, "%d-%b-%y"),
          City = str_to_title(City),
          Candidate = Popular_name,
-         Zip = str_sub(Zip, 1, 5)
+         Zip = str_sub(Zip, 1, 5),
+         Zip = as.numeric(Zip)
       ) %>% 
       
       # fix extraneous data
       # (WARNING: May not generalize to all datasets)
       filter(City != "Berlin Germany") %>% 
-      mutate(Zip = ifelse(Zip == "0", "20001", Zip),
-             Zip = ifelse(City == "Sydney", "36117", Zip),
-             Zip = ifelse(Recipient == "SP PLUS CORPORATION", "60601", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "JIMMY JOHN'S", "29201", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "TAXI-PASS", "10001", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "SERESC CONFERENCE CENTER", "3110", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "EMBASSY SUITES", "22101", Zip),
-             Zip = ifelse(Zip == "" & Candidate == "James Webb" & City == "San Diego", "92106", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "WYNDHAM", "97201", Zip),
-             Zip = ifelse(Zip == "" & Recipient == "HILTON NEWARK PENN STATION", "7102", Zip),
-             City = ifelse(City == "" & Candidate == "Chris Christie" & State == "NH", "Manchester", City),
-             Zip = ifelse(Zip == "" & Recipient == "HOLIDAY INN EXPRESS", "3101", Zip),
-             Zip = ifelse(Zip == "" & City == "Chicago", "60612", Zip)
+      mutate(Zip = ifelse(Zip == 0, 20001, Zip),
+             Zip = ifelse(City == "Sydney", 36117, Zip),
+             Zip = ifelse(Recipient == "SP PLUS CORPORATION", 60601, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "JIMMY JOHN'S", 29201, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "TAXI-PASS", 10001, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "SERESC CONFERENCE CENTER", 3110, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "EMBASSY SUITES", 22101, Zip),
+             Zip = ifelse(is.na(Zip) & Candidate == "James Webb" & City == "San Diego", 92106, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "WYNDHAM", 97201, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "HILTON NEWARK PENN STATION", 7102, Zip),
+             Zip = ifelse(is.na(Zip) & Recipient == "HOLIDAY INN EXPRESS", 3101, Zip),
+             Zip = ifelse(is.na(Zip) & City == "Chicago", 60612, Zip),
+             
+             City = ifelse(City == "" & Candidate == "Chris Christie" & State == "NH", "Manchester", City)
              ) %>%
       
+      # add lat/lng
+      left_join(select(zip_data, 
+                       Zip, 
+                       Lat, 
+                       Lng), 
+                by = "Zip") %>%
+      
       # rearrange columns
-      select(1, 10:11, 2:8) %>%
+      select(1, 10:11, 2:8, 12:13) %>% 
       
       # sort rows
       arrange(desc(Running), Candidate, Date, Amount, State, Category)
