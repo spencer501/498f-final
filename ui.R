@@ -35,8 +35,6 @@ shinyUI(fluidPage(
                      value = c(-3000.00, 700000.00),
                      step = 10000
                      )
-         
-         
       ),
       
       # Display outputs
@@ -48,6 +46,6 @@ shinyUI(fluidPage(
                      tabPanel("Table")
          )
       )
-   )
+   ) # close sidebarLayout
    
 ))
