@@ -10,7 +10,7 @@ library(dplyr)
 #cand_name <- "Donald Trump"
 
 # Read in clean data
-fec_data <- read.csv('data/2016_campaign_finances-clean.csv')
+fec_data <- read.csv('data/2016_campaign_finances-clean.csv', stringsAsFactors = FALSE)
 
 # filter for data about a specific candidate
 finance_for <- function(cand_name) {

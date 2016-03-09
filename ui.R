@@ -6,6 +6,9 @@
 # Needed libraries
 library(shiny)
 
+# Source files
+source("scripts/analysis.R")
+
 # Create UI
 shinyUI(fluidPage(
    # Title of UI
@@ -17,12 +20,12 @@ shinyUI(fluidPage(
       # Inputs
       sidebarPanel(
          # show only currently running candidates
-         checkboxInput("ckbx_running", label = "Display only currently running candidates:", value = TRUE),
+         checkboxInput("ckbx_running", label = "Display only currently running candidates:", value = FALSE),
          
          # choose candidate
          selectInput("slctbx_candidate", label = "Candidate:",
-                     choices = c("a", "b", "c", "d"),
-                     selected = "a"
+                     choices = unique(fec_data$Candidate),
+                     selected = unique(fec_data$Candidate)[1]
                      ),
          
          # spending range
@@ -38,9 +41,10 @@ shinyUI(fluidPage(
       
       # Display outputs
       mainPanel(
-         tabsetPanel(type = "tabs", 
+         tabsetPanel(type = "tabs",
+                     tabPanel("Summary"),
                      tabPanel("Travel"), 
-                     tabPanel("Expences"), 
+                     tabPanel("expenses"), 
                      tabPanel("Table")
          )
       )
