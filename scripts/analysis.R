@@ -31,3 +31,11 @@ spending_by_date_for <- function(spending_data) {
    
    return(return_data)
 }
+
+# Filter down to expense amounts in a specific range
+spending_range_of <-function(spending_data, min, max) {
+   return_data <- spending_data %>% 
+      filter((Amount >= min) & (Amount <= max))
+   
+   return(return_data)
+}
