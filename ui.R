@@ -20,17 +20,18 @@ shinyUI(fluidPage(
          checkboxInput("ckbx_running", label = "Display only currently running candidates:", value = TRUE),
          
          # choose candidate
-         selectInput("slctbx_candidate", label = "Candidate",
+         selectInput("slctbx_candidate", label = "Candidate:",
                      choices = c("a", "b", "c", "d"),
                      selected = "a"
                      ),
          
          # spending range
-         sliderInput("sldr_amount", label = "Amount Range",
+         sliderInput("sldr_amount", label = "Amount Range:",
                      min = -3000.00, 
                      max = 700000.00,
                      value = c(-3000.00, 700000.00),
-                     step = 10000)
+                     step = 10000
+                     )
          
          
       ),
@@ -38,8 +39,8 @@ shinyUI(fluidPage(
       # Display outputs
       mainPanel(
          tabsetPanel(type = "tabs", 
-                     tabPanel("Plot"), 
-                     tabPanel("Summary"), 
+                     tabPanel("Travel"), 
+                     tabPanel("Expences"), 
                      tabPanel("Table")
          )
       )
