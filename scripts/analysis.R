@@ -39,3 +39,9 @@ spending_range_of <-function(spending_data, min, max) {
    
    return(return_data)
 }
+
+# Filter down to expenses that map movement
+travel_of <- function(spending_data) {
+   return_data <- spending_data %>% 
+      filter(spending_data, grepl('TRAVEL|FOOD', Category))
+}
