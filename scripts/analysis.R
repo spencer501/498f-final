@@ -45,3 +45,23 @@ travel_of <- function(spending_data) {
    return_data <- spending_data %>% 
       filter(spending_data, grepl('TRAVEL|FOOD', Category))
 }
+
+# Get general summary of candidate spending
+summary_for <- function(spending_data) {
+   
+   return_data <- spending_data %>% 
+      group_by(Candidate, 
+               State) %>%
+      summarise(total = sum(Amount),
+                expense = sum(Amount[Amount > 0]),
+                income = sum(Amount[Amount < 0]),
+                transactions = length(Amount),
+                min_expense = min(Amount[Amount > 0]),
+                max_expense = max(Amount),
+                most_pop = names(sort(-table(Recipient)))[1],
+                biggest_recipient = Recipient[Amount == max(Amount)][1])
+    
+      
+   return(return_data)  
+}
+
