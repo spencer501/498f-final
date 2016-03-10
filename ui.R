@@ -38,15 +38,6 @@ shinyUI(
                ),
                
                # spending range
-               sliderInput(
-                  "sldr_amount",
-                  label = "Amount Range:",
-                  min = -3000.00,
-                  max = 700000.00,
-                  value = c(-3000.00, 700000.00),
-                  step = 10000
-               ),
-               
                numericInput("min_range", label = "Minimum value", value = -3000.00),
                numericInput("max_range", label = "Max value", value = 700000.00)
             ),
@@ -62,6 +53,17 @@ shinyUI(
                )
             )
          ) # close sidebarLayout
-      ) # end `individual data` tabpanel
+      ), # end `individual data` tabpanel
+      
+      # group data
+      tabPanel("Group Information",
+         
+         # Create navigation panel
+         navlistPanel(
+            
+            tabPanel("Pie Chart"),
+            tabPanel("Spending over time")
+         ) # end navigation panel
+      ) # end group data
    ) # end navbarPage
 ) # end shinyUI
