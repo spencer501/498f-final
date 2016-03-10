@@ -14,7 +14,7 @@ shinyUI(
    navbarPage(
       
       # Title of UI
-      "2016 Presidential Campaign Spending   ",
+      strong("2016 Presidential Campaign Spending"),
    
       # Intro tab
       tabPanel("Intro"),
@@ -45,7 +45,10 @@ shinyUI(
                   max = 700000.00,
                   value = c(-3000.00, 700000.00),
                   step = 10000
-               )
+               ),
+               
+               numericInput("min_range", label = "Minimum value", value = -3000.00),
+               numericInput("max_range", label = "Max value", value = 700000.00)
             ),
             
             # Display outputs
