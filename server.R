@@ -7,10 +7,8 @@
 library(plotly)
 library(shiny)
 
-# Source file for function
-source('data/analysis.R')
 
 shinyServer(function(input, output) {
-   
-   
+
+
 })
