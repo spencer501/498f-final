@@ -33,6 +33,10 @@ shinyServer(function(input, output) {
         bar_state_spending()
   })
   
-
+  # Bar chart of transactions by state for a given candidate
+  output$bar_state_transactions <- renderPlotly({
+     fec_data %>% finance_for(input$slctbx_candidate) %>% summary_for() %>%
+        bar_state_transactions()
+  })
 
 })
