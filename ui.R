@@ -67,7 +67,8 @@ shinyUI(
                   type = "tabs",
                   tabPanel("Summary"),
                   tabPanel("Travel"),
-                  tabPanel("Expense Summary"),
+                  tabPanel("Expense Summary",
+                           plotlyOutput("bar_state_spending")),
                   tabPanel("Table")
                )
             )
