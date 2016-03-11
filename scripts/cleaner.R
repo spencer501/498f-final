@@ -80,6 +80,7 @@ formatted_data <- data %>%
    # fix extraneous data
    # (WARNING: May not generalize to all datasets)
    filter(City != "Berlin Germany") %>% 
+   filter(Date <= as.Date("2016-01-31"))
    mutate(Zip = ifelse(Zip == 0, 20001, Zip),
           Zip = ifelse(City == "Sydney", 36117, Zip),
           Zip = ifelse(Recipient == "SP PLUS CORPORATION", 60601, Zip),
