@@ -82,10 +82,12 @@ shinyUI(
             
             # Pie chart
             tabPanel("Pie Chart",
-                     plotlyOutput("chart")
+                     plotlyOutput("pie_chart")
             ),
             
-            tabPanel("Spending over time")
+            tabPanel("Spending over time",
+                     plotlyOutput("spending_v_time")
+                     )
          ) # end navigation panel
       ) # end group data
    ) # end navbarPage

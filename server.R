@@ -9,12 +9,19 @@ library(shiny)
 
 source("scripts/analysis.R")
 source("scripts/pie_chart.R")
+source("scripts/spending_v_time_graph.R")
 
 shinyServer(function(input, output) {
    
-  # Created pie chart for total amount donated for each candidate
-  output$chart <- renderPlotly({
+  # Created pie chart for total amount donated for all candidate
+  output$pie_chart <- renderPlotly({
      fec_data %>% total_spending_of() %>% tot_expense()  
+  })
+  
+  # graph spending over time for all candidates
+  output$spending_v_time <- renderPlotly({
+     fec_data %>% spending_by_date_for() %>% spending_v_time
+        
   })
   
   
