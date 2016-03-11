@@ -61,8 +61,11 @@ shinyUI(
          # Create navigation panel
          navlistPanel(
             
+            # Pie chart
             tabPanel("Pie Chart",
-                     plotlyOutput("chart")),
+                     plotlyOutput("chart")
+            ),
+            
             tabPanel("Spending over time")
          ) # end navigation panel
       ) # end group data

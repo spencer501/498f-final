@@ -7,13 +7,16 @@
 library(plotly)
 library(shiny)
 
+source("scripts/analysis.R")
 source("scripts/pie_chart.R")
 
 shinyServer(function(input, output) {
+   
   # Created pie chart for total amount donated for each candidate
   output$chart <- renderPlotly({
-    tot_expense(expense_data)  
+     fec_data %>% total_spending_of() %>% tot_expense()  
   })
+  
   
 
 
