@@ -66,14 +66,15 @@ shinyUI(
             mainPanel(
                tabsetPanel(
                   type = "tabs",
-                  tabPanel("Summary",
-                           dataTableOutput("summary_table")),
+                  tabPanel("Summary")
+),
 #                  tabPanel("Travel"),
                   tabPanel("State Expenses",
                            plotlyOutput("bar_state_spending")),
                   tabPanel("State Transactions",
                            plotlyOutput("bar_state_transactions"))#,
-#                  tabPanel("Table")
+                  tabPanel("Table",
+                           dataTableOutput("summary_table"))
                )
             )
          ) # close sidebarLayout
