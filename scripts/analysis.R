@@ -5,6 +5,7 @@
 
 # Needed libraries
 library(dplyr)
+library(lubridate)
 
 # temp
 #cand_name <- "Donald Trump"
@@ -13,11 +14,19 @@ library(dplyr)
 fec_data <- read.csv('data/2016_campaign_finances-clean.csv', stringsAsFactors = FALSE)
 
 # filter for data about a specific candidate
-finance_for <- function(cand_name) {
-   cand_data <- fec_data %>% 
+finance_for <- function(cand_name, spending_data) {
+   cand_data <- spending_data %>% 
       filter(Candidate == cand_name)
    
    return(cand_data)
+}
+
+# filter down to candidates who are still running
+still_running <- function(spending_data) {
+   return_data <- spending_data %>% 
+      filter(Running == TRUE)
+   
+   return(return_data)
 }
 
 # summarize total spending of candidates
@@ -32,12 +41,14 @@ total_spending_of <- function(spending_data) {
 
 # Summarize spending by date
 spending_by_date_for <- function(spending_data) {
-   return_data <- spending_data %>% 
+   return_data <- spending_data %>%
+      mutate(Date = as.Date(paste0("1", "-", month(Date), "-", year(Date)), "%d-%m-%Y")) %>% 
       group_by(Candidate, Date) %>% 
       summarise('transactions' = length(Amount),
                 'total_spent' = sum(Amount),
                 'lat' = Lat[1],
-                'lng' = Lng[1])
+                'lng' = Lng[1]) 
+      
    
    return(return_data)
 }
