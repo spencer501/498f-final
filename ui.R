@@ -66,7 +66,7 @@ shinyUI(
             mainPanel(
                tabsetPanel(
                   type = "tabs",
-                  tabPanel("Summary")
+                  tabPanel("Summary"),
 ),
 #                  tabPanel("Travel"),
                   tabPanel("State Expenses",
