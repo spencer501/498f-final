@@ -23,3 +23,4 @@ tot_expense <- function (fec_data) {
           type = "pie") %>% 
     layout(title = "2016 Campaign:Amount Donated") 
 }
+
