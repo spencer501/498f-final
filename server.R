@@ -15,12 +15,12 @@ shinyServer(function(input, output) {
    
   # Created pie chart for total amount donated for all candidate
   output$pie_chart <- renderPlotly({
-     fec_data %>% total_spending_of() %>% tot_expense()  
+     fec_data %>% still_running() %>% total_spending_of() %>% tot_expense()  
   })
   
   # graph spending over time for all candidates
   output$spending_v_time <- renderPlotly({
-     fec_data %>% spending_by_date_for() %>% spending_v_time
+     fec_data %>% still_running() %>% spending_by_date_for() %>% spending_v_time()
         
   })
   
