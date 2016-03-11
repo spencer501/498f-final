@@ -6,6 +6,7 @@
 # Needed libraries
 library(shiny)
 library(plotly)
+library(leaflet)
 
 # Source files
 source("scripts/analysis.R")
@@ -55,18 +56,15 @@ shinyUI(
                   label = "Candidate:",
                   choices = unique(fec_data$Candidate),
                   selected = unique(fec_data$Candidate)[1]
-               ),
-               
-               # spending range
-               numericInput("min_range", label = "Minimum value", value = -3000.00),
-               numericInput("max_range", label = "Max value", value = 700000.00)
+               )
             ),
             
             # Display outputs
             mainPanel(
                tabsetPanel(
                   type = "tabs",
-                  tabPanel("Summary"),
+                  tabPanel("Summary",
+                           leafletOutput("mymap")),
 #                  tabPanel("Travel"),
                   tabPanel("State Expenses",
                            plotlyOutput("bar_state_spending")),
