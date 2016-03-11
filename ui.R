@@ -48,7 +48,7 @@ shinyUI(
             # Inputs
             sidebarPanel(
                # show only currently running candidates
-               checkboxInput("ckbx_running", label = "Display only currently running candidates:", value = FALSE),
+               #checkboxInput("ckbx_running", label = "Display only currently running candidates:", value = FALSE),
                
                # choose candidate
                selectInput(
@@ -57,6 +57,7 @@ shinyUI(
                   choices = unique(fec_data$Candidate),
                   selected = unique(fec_data$Candidate)[1]
                )
+
             ),
             
             # Display outputs
