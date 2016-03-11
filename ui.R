@@ -5,6 +5,7 @@
 
 # Needed libraries
 library(shiny)
+library(plotly)
 
 # Source files
 source("scripts/analysis.R")
@@ -65,13 +66,14 @@ shinyUI(
             mainPanel(
                tabsetPanel(
                   type = "tabs",
-                  tabPanel("Summary"),
-                  tabPanel("Travel"),
+                  tabPanel("Summary",
+                           dataTableOutput("summary_table")),
+#                  tabPanel("Travel"),
                   tabPanel("State Expenses",
                            plotlyOutput("bar_state_spending")),
                   tabPanel("State Transactions",
-                           plotlyOutput("bar_state_transactions")),
-                  tabPanel("Table")
+                           plotlyOutput("bar_state_transactions"))#,
+#                  tabPanel("Table")
                )
             )
          ) # close sidebarLayout

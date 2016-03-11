@@ -38,5 +38,10 @@ shinyServer(function(input, output) {
      fec_data %>% finance_for(input$slctbx_candidate) %>% summary_for() %>%
         bar_state_transactions()
   })
+  
+  #Table of general summary information for a candidate
+  output$summary_table <- renderDataTable(
+      fec_data %>% finance_for(input$slctbx_candidate) %>% summary_for()
+  )
 
 })
