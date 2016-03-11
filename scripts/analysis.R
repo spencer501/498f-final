@@ -53,6 +53,18 @@ spending_by_date_for <- function(spending_data) {
    return(return_data)
 }
 
+# group by city
+spending_by_city <- function(spending_data) {
+   return_data <- spending_data %>%
+      filter(!is.na(Lat)) %>% 
+      group_by(Candidate, City) %>% 
+      summarise(total = sum(Amount),
+                lat = Lat[1],
+                lng = Lng[1])
+   
+   return(return_data)
+}
+
 # Filter down to expense amounts in a specific range
 spending_range_of <-function(spending_data, min, max) {
    return_data <- spending_data %>% 
