@@ -14,7 +14,7 @@ library(lubridate)
 fec_data <- read.csv('data/2016_campaign_finances-clean.csv', stringsAsFactors = FALSE)
 
 # filter for data about a specific candidate
-finance_for <- function(cand_name, spending_data) {
+finance_for <- function(spending_data, cand_name) {
    cand_data <- spending_data %>% 
       filter(Candidate == cand_name)
    
