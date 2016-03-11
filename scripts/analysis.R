@@ -20,6 +20,16 @@ finance_for <- function(cand_name) {
    return(cand_data)
 }
 
+# summarize total spending of candidates
+total_spending_of <- function(spending_data) {
+   return_data <- spending_data %>% 
+      group_by(Candidate) %>% 
+      summarise(total = sum(Amount)) %>% 
+      arrange(total)
+   
+   return(return_data)
+}
+
 # Summarize spending by date
 spending_by_date_for <- function(spending_data) {
    return_data <- spending_data %>% 
