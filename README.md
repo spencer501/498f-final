@@ -3,6 +3,8 @@
 Members: Fion, Jared, and Spencer
 Section: FB
 
+[Link](https://spencer501.shinyapps.io/498f-final/) to shinyapps project.
+
 ## **Introduction** 
 
 For our final project for INFO 498F, we are looking at the 2016 Presidential Campaign Finance Expenditure Data. This dataset was collected by the Federal Election Commission (FEC), which is an independent regulatory agency that discloses campaign finance information, contributions, and public funding for Presidential elections. This dataset includes the name of the candidates running, the amount of expenses, the date and location (city, state, zip, longitude, and latitude) of the transactions, and the category of expenses. Additionally, more information about the dataset can be found via this [link](http://www.fec.gov/disclosurep/pnational.do).
